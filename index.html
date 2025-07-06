@@ -3,51 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhruv Mehta - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Dhruv Mehta - Portfolio Cortex</title>
+    <link rel="stylesheet" href="style_new.css"> <!-- Link to the new CSS file -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto:wght@300;400;700&family=Audiowide&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <audio id="ambient-sound" loop></audio>
+    <audio id="click-sound"></audio>
+    <audio id="hover-sound"></audio>
+    <audio id="select-sound"></audio>
 
-    <!-- Animated Background Elements -->
+    <!-- Unified Animated Background -->
     <div class="background-wrapper">
-        <div id="bg-animation-left">
-             <canvas id="matrix-canvas"></canvas> <!-- Canvas for Matrix Effect -->
-        </div>
-        <div id="bg-animation-right">
-            <!-- DNA and EKG elements are pure CSS -->
-        </div>
+        <canvas id="particle-canvas"></canvas>
     </div>
 
     <!-- Welcome Screen -->
     <div id="welcome-screen" class="screen active">
+        <div class="interactive-orb-container">
+            <div id="interactive-orb" data-sound="hover"></div>
+        </div>
         <div class="welcome-content">
-            <h1>Welcome to my Portfolio</h1>
-            <p class="name-reveal"><span>I am <b> Dhruv Mehta</b>, A medical student in 3rd year of MBBS. I have keen interest in coding and writing medical articles.</span></p>
-            <button id="enter-button">Enter the Cortex</button>
+            <h1 id="welcome-title"><span class="char">W</span><span class="char">e</span><span class="char">l</span><span class="char">c</span><span class="char">o</span><span class="char">m</span><span class="char">e</span> <span class="char">t</span><span class="char">o</span> <span class="char">m</span><span class="char">y</span> <span class="char">P</span><span class="char">o</span><span class="char">r</span><span class="char">t</span><span class="char">f</span><span class="char">o</span><span class="char">l</span><span class="char">i</span><span class="char">o</span></h1>
+            <p id="name-reveal" class="name-reveal">I am <span class="glitch" data-text="Dhruv Mehta">Dhruv Mehta</span>, a medical student in 3rd year of MBBS. I have keen interest in coding and writing medical articles.</p>
+            <button id="enter-button" data-sound="click">Enter the Cortex</button>
         </div>
     </div>
 
     <!-- Brain Interaction Screen -->
     <div id="brain-screen" class="screen">
          <div class="brain-container">
-            <!-- SVG Brain Structure -->
-            <svg id="interactive-brain" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+            <svg id="interactive-brain" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                 <defs>
                     <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="8" result="blur"/> <!-- Slightly softer glow -->
-                        <feFlood flood-color="var(--primary-blue)" result="color"/>
+                        <feGaussianBlur stdDeviation="10" result="blur"/>
+                        <feFlood flood-color="var(--accent-blue)" result="color"/>
                         <feComposite in="color" in2="blur" operator="in" result="glow"/>
                         <feMerge>
                             <feMergeNode in="glow"/>
                             <feMergeNode in="SourceGraphic"/>
                         </feMerge>
                     </filter>
-                     <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="8" result="blur"/> <!-- Slightly softer glow -->
-                         <feFlood flood-color="var(--primary-green)" result="color"/>
+                     <filter id="glow-magenta" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="10" result="blur"/>
+                         <feFlood flood-color="var(--accent-pink)" result="color"/>
                         <feComposite in="color" in2="blur" operator="in" result="glow"/>
                         <feMerge>
                             <feMergeNode in="glow"/>
@@ -55,8 +58,8 @@
                         </feMerge>
                     </filter>
                      <filter id="glow-impulse" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="4" result="blur"/>
-                         <feFlood flood-color="var(--impulse-color)" result="color"/>
+                        <feGaussianBlur stdDeviation="5" result="blur"/>
+                         <feFlood flood-color="var(--neutral-light)" result="color"/>
                         <feComposite in="color" in2="blur" operator="in" result="glow"/>
                          <feMerge>
                             <feMergeNode in="glow"/>
@@ -64,128 +67,87 @@
                     </filter>
                 </defs>
 
-                <!-- Central Divider (Optional) -->
-                <line x1="400" y1="50" x2="400" y2="550" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1"/>
+                <line x1="400" y1="20" x2="400" y2="580" stroke="rgba(240, 240, 240, 0.1)" stroke-width="1.5"/>
 
-                <!-- Left Hemisphere Group (Coding - Blue) -->
-                <g id="brain-left" class="brain-half">
-                    <!-- Outline Path -->
-                    <path class="brain-outline" filter="url(#glow-blue)" d="M400 50 C 200 50, 50 200, 50 325 C 50 450, 200 550, 400 550 Z" />
-
-                    <!-- Internal "Circuit" Lines -->
-                    <path class="brain-internal" d="M 250 150 L 200 200 L 200 280 L 150 330"/>
-                    <path class="brain-internal" d="M 300 180 L 340 250 L 300 320 L 300 400"/>
-                    <path class="brain-internal" d="M 150 450 L 200 400 L 250 480"/>
-                    <path class="brain-internal" d="M 200 200 L 280 220 L 340 250"/>
-                    <path class="brain-internal" d="M 200 280 L 270 300 L 300 320"/>
-                    <path class="brain-internal" d="M 300 400 L 250 430 L 200 400"/>
-                    <path class="brain-internal" d="M 120 250 L 180 260 L 200 280"/>
-
-                    <!-- Nodes/Synapses -->
-                    <circle cx="250" cy="150" r="9" class="node pulse-node-color"/>
-                    <circle cx="200" cy="200" r="7" class="node"/>
-                    <circle cx="200" cy="280" r="11" class="node pulse-node-color delay1"/>
-                    <circle cx="150" cy="330" r="8" class="node"/>
-                    <circle cx="300" cy="180" r="7" class="node"/>
-                    <circle cx="340" cy="250" r="9" class="node"/>
-                    <circle cx="300" cy="320" r="8" class="node pulse-node-color delay2"/>
-                    <circle cx="300" cy="400" r="10" class="node"/>
-                    <circle cx="150" cy="450" r="7" class="node"/>
-                    <circle cx="200" cy="400" r="8" class="node"/>
-                    <circle cx="250" cy="480" r="6" class="node pulse-node-color delay3"/>
-                    <circle cx="280" cy="220" r="6" class="node"/>
-                    <circle cx="270" cy="300" r="7" class="node"/>
-                    <circle cx="250" cy="430" r="5" class="node"/>
-                    <circle cx="120" cy="250" r="8" class="node"/>
-                    <circle cx="180" cy="260" r="6" class="node"/>
-
-                    <!-- Impulse Paths (Overlay) -->
-                    <path class="impulse blue" d="M 250 150 L 200 200 L 200 280 L 150 330"/>
-                    <path class="impulse blue delay1" d="M 300 180 L 340 250 L 300 320 L 300 400"/>
-                    <path class="impulse blue delay2" d="M 120 250 L 180 260 L 200 280"/>
-                    <path class="impulse blue delay3" d="M 150 450 L 200 400 L 250 480"/>
-
-                    <text x="225" y="335" class="brain-text">CODING</text>
+                <g id="brain-left" class="brain-half" data-sound="hover" data-section="coding">
+                    <path class="brain-outline" filter="url(#glow-blue)" d="M400 50 C 150 50, 0 200, 0 325 C 0 450, 150 550, 400 550 L 400 50 Z" />
+                    <path class="brain-internal" d="M 200 150 Q 250 250 200 350 M 300 120 Q 380 300 300 480 M 100 200 Q 150 300 100 400 M 150 100 L 250 200 L 150 300 L 250 400 L 150 500"/>
+                    <circle cx="200" cy="150" r="8" class="node"/>
+                    <circle cx="300" cy="120" r="10" class="node delay1"/>
+                    <circle cx="100" cy="200" r="7" class="node delay2"/>
+                    <circle cx="250" cy="200" r="9" class="node delay3"/>
+                    <path class="impulse blue" d="M 200 150 Q 250 250 200 350"/>
+                    <path class="impulse blue delay1" d="M 300 120 Q 380 300 300 480"/>
+                    <text x="200" y="310" class="brain-text">CODING</text>
                 </g>
 
-                <!-- Right Hemisphere Group (Medical - Green) -->
-                 <g id="brain-right" class="brain-half">
-                    <!-- Outline Path -->
-                    <path class="brain-outline" filter="url(#glow-green)" d="M400 50 C 600 50, 750 200, 750 325 C 750 450, 600 550, 400 550 Z" />
-
-                    <!-- Internal "Circuit" Lines -->
-                    <path class="brain-internal" d="M 550 150 L 600 200 L 600 280 L 650 330"/>
-                    <path class="brain-internal" d="M 500 180 L 460 250 L 500 320 L 500 400"/>
-                    <path class="brain-internal" d="M 650 450 L 600 400 L 550 480"/>
-                    <path class="brain-internal" d="M 600 200 L 520 220 L 460 250"/>
-                    <path class="brain-internal" d="M 600 280 L 530 300 L 500 320"/>
-                    <path class="brain-internal" d="M 500 400 L 550 430 L 600 400"/>
-                    <path class="brain-internal" d="M 680 250 L 620 260 L 600 280"/>
-
-                    <!-- Nodes/Synapses -->
-                    <circle cx="550" cy="150" r="9" class="node pulse-node-color"/>
-                    <circle cx="600" cy="200" r="7" class="node"/>
-                    <circle cx="600" cy="280" r="11" class="node pulse-node-color delay1"/>
-                    <circle cx="650" cy="330" r="8" class="node"/>
-                    <circle cx="500" cy="180" r="7" class="node"/>
-                    <circle cx="460" cy="250" r="9" class="node"/>
-                    <circle cx="500" cy="320" r="8" class="node pulse-node-color delay2"/>
-                    <circle cx="500" cy="400" r="10" class="node"/>
-                    <circle cx="650" cy="450" r="7" class="node"/>
-                    <circle cx="600" cy="400" r="8" class="node"/>
-                    <circle cx="550" cy="480" r="6" class="node pulse-node-color delay3"/>
-                    <circle cx="520" cy="220" r="6" class="node"/>
-                    <circle cx="530" cy="300" r="7" class="node"/>
-                    <circle cx="550" cy="430" r="5" class="node"/>
-                    <circle cx="680" cy="250" r="8" class="node"/>
-                    <circle cx="620" cy="260" r="6" class="node"/>
-
-                     <!-- Impulse Paths (Overlay) -->
-                     <path class="impulse green" d="M 550 150 L 600 200 L 600 280 L 650 330"/>
-                     <path class="impulse green delay1" d="M 500 180 L 460 250 L 500 320 L 500 400"/>
-                     <path class="impulse green delay2" d="M 680 250 L 620 260 L 600 280"/>
-                     <path class="impulse green delay3" d="M 650 450 L 600 400 L 550 480"/>
-
-                    <text x="575" y="335" class="brain-text">MEDICAL</text>
+                 <g id="brain-right" class="brain-half" data-sound="hover" data-section="medical">
+                    <path class="brain-outline" filter="url(#glow-magenta)" d="M400 50 C 650 50, 800 200, 800 325 C 800 450, 650 550, 400 550 L 400 50 Z" />
+                    <path class="brain-internal" d="M 600 150 Q 550 250 600 350 M 500 120 Q 420 300 500 480 M 700 200 Q 650 300 700 400 M 650 100 L 550 200 L 650 300 L 550 400 L 650 500"/>
+                    <circle cx="600" cy="150" r="8" class="node"/>
+                    <circle cx="500" cy="120" r="10" class="node delay1"/>
+                    <circle cx="700" cy="200" r="7" class="node delay2"/>
+                    <circle cx="550" cy="200" r="9" class="node delay3"/>
+                    <path class="impulse magenta" d="M 600 150 Q 550 250 600 350"/>
+                    <path class="impulse magenta delay1" d="M 500 120 Q 420 300 500 480"/>
+                    <text x="600" y="310" class="brain-text">MEDICAL</text>
                 </g>
             </svg>
         </div>
-         <p class="instruction">Click a hemisphere to explore</p>
+         <p class="instruction">Select a hemisphere to explore the domain</p>
     </div>
 
     <!-- Coding Section -->
     <div id="coding-section" class="content-section screen">
-        <button class="back-button">← Go Back</button>
+        <button class="back-button" data-sound="click">← Back to Cortex</button>
         <h2>Coding Nexus</h2>
-        <div class="project-list">
-            <div class="project-item">
-                <h3>Tetris Game</h3>
-                <p>Classic Tetris fun built with vanilla JavaScript, HTML, and CSS.</p>
-                <a href="https://classy-flan-bb3159.netlify.app/" target="_blank" class="link-button">Play Game</a>
+        <div class="project-grid">
+            <div class="project-card" data-sound="hover">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <i class="fas fa-gamepad project-icon"></i>
+                    <h3>Tetris Game</h3>
+                    <p>Classic Tetris fun built with vanilla JavaScript, HTML, and CSS.</p>
+                    <a href="https://classy-flan-bb3159.netlify.app/" target="_blank" class="link-button" data-sound="click">Play Game</a>
+                </div>
             </div>
-            <div class="project-item">
-                <h3>Productivity Timer</h3>
-                <p>A sleek Pomodoro-style timer to enhance focus sessions.</p>
-                <a href="https://pulseproductive.netlify.app/" target="_blank" class="link-button">Use Timer</a>
+            <div class="project-card" data-sound="hover">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <i class="fas fa-stopwatch project-icon"></i>
+                    <h3>Productivity Timer</h3>
+                    <p>A sleek Pomodoro-style timer to enhance focus sessions.</p>
+                    <a href="https://pulseproductive.netlify.app/" target="_blank" class="link-button" data-sound="click">Use Timer</a>
+                </div>
             </div>
+            <!-- Add more project cards here if needed -->
         </div>
     </div>
 
     <!-- Medical Section -->
     <div id="medical-section" class="content-section screen">
-        <button class="back-button">← Go Back</button>
+        <button class="back-button" data-sound="click">← Back to Cortex</button>
         <h2>Clinical Insights</h2>
-         <div class="project-list">
-             <div class="project-item">
-                 <h3>Medium Articles</h3>
-                 <p>Exploring diverse medical topics, research, and personal reflections.</p>
-                 <a href="https://medium.com/@dhruvmehta.rps" target="_blank" class="link-button">Read on Medium</a>
+         <div class="project-grid">
+             <div class="project-card" data-sound="hover">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <i class="fab fa-medium project-icon"></i>
+                    <h3>Medium Articles</h3>
+                    <p>Exploring diverse medical topics, research, and personal reflections.</p>
+                    <a href="https://medium.com/@dhruvmehta.rps" target="_blank" class="link-button" data-sound="click">Read on Medium</a>
+                </div>
              </div>
-              <div class="project-item">
-                 <h3>ResearchGate Profile</h3>
-                 <p>Access to published research papers and academic contributions.</p>
-                 <a href="#" target="_blank" class="link-button">View Research (Link Pending)</a> <!-- Add actual link later -->
+              <div class="project-card" data-sound="hover">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <i class="fas fa-flask project-icon"></i>
+                    <h3>ResearchGate Profile</h3>
+                    <p>Access to published research papers and academic contributions.</p>
+                    <a href="#" target="_blank" class="link-button" data-sound="click">View Research (Pending)</a>
+                </div>
              </div>
+             <!-- Add more project cards here if needed -->
         </div>
     </div>
 
