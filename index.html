@@ -1,156 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhruv Mehta - Portfolio Cortex</title>
-    <link rel="stylesheet" href="style_new.css"> <!-- Link to the new CSS file -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto:wght@300;400;700&family=Audiowide&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Dhruv Mehta • Portfolio</title>
+<style>
+/* === RESET & ROOT === */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+:root{--p:#00f5ff;--s:#ff00ff;--bg:#111214;--fg:#fff}
+
+/* === WELCOME GATE === */
+#gate{z-index:9999;position:fixed;inset:0;background:radial-gradient(circle at 30% 70%,var(--p) 0%,var(--s) 40%,#000 80%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;animation:pulseBg 6s infinite alternate;transition:transform 1s cubic-bezier(.86,0,.07,1)}
+@keyframes pulseBg{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(60deg)}}
+#gate h1{font-size:clamp(2.5rem,10vw,5rem);letter-spacing:.07em;text-transform:uppercase;background:linear-gradient(90deg,var(--p),var(--s),var(--p));background-size:200%;-webkit-background-clip:text;color:transparent;animation:glitch 2.5s infinite}
+@keyframes glitch{0%{background-position:0%}50%{background-position:200%}100%{background-position:0%}}
+#gate p{margin:1.2rem 0 2.5rem;font-size:1.3rem;font-weight:300}
+#gate button{padding:1rem 3rem;border:none;border-radius:50px;background:#fff;color:#0f172a;font-weight:700;font-size:1.1rem;cursor:pointer;transition:.4s}
+#gate button:hover{transform:scale(1.08);box-shadow:0 0 25px var(--p)}
+
+/* === CURSOR === */
+.cursor{position:fixed;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle,var(--p),transparent);pointer-events:none;z-index:9998;mix-blend-mode:difference;transition:transform .1s}
+
+/* === NEURAL BACKGROUND === */
+#neural-bg{position:fixed;inset:0;z-index:-3;pointer-events:none}
+
+/* === DNA HELIX === */
+.dna{position:fixed;top:20px;right:20px;width:80px;height:80px;z-index:-1;opacity:.4}
+.dna svg{animation:spin 20s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* === FLOATING ICONS === */
+.floating-icon{position:absolute;font-size:2.2rem;color:var(--p);opacity:.15;animation:float 20s linear infinite}
+@keyframes float{0%{transform:translateY(110vh) rotate(0deg)}100%{transform:translateY(-20vh) rotate(720deg)}}
+
+/* === CELL PARTICLES === */
+.cell-particle{position:fixed;border-radius:50%;background:radial-gradient(circle,var(--p),transparent 70%);opacity:.4;pointer-events:none;animation:drift 25s linear infinite}
+@keyframes drift{0%{transform:translate(0,0) scale(.5)}100%{transform:translate(var(--dx),var(--dy)) scale(1.5)}}
+
+/* === CARDS PULSE === */
+.card{transition:.5s}
+.card:hover{transform:translateY(-12px) scale(1.02);border-color:var(--p);box-shadow:0 0 20px var(--p)}
+
+/* === EXISTING STYLES === */
+body{background:#111214}
+#ecg-bg{position:fixed;inset:0;z-index:-2}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 20px}
+.hero h1{font-size:clamp(3rem,10vw,7rem);background:linear-gradient(135deg,var(--p),var(--s));-webkit-background-clip:text;color:transparent;animation:glow 2s ease-in-out infinite alternate}
+@keyframes glow{from{text-shadow:0 0 20px var(--p)}to{text-shadow:0 0 30px var(--s),0 0 50px var(--s)}}
+.hero p{font-size:1.4rem;margin:.5rem 0;opacity:.85}
+.btn{display:inline-block;margin:.4rem .4rem 0 0;padding:.9rem 2.4rem;background:linear-gradient(45deg,var(--p),var(--s));color:#0f172a;border-radius:50px;font-weight:700;text-decoration:none;transition:.3s}
+.btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 10px 25px rgba(0,245,255,.6)}
+
+#projects{min-height:100vh;padding:120px 20px}
+#projects h2{text-align:center;font-size:2.8rem;margin-bottom:3rem}
+.grid{display:grid;gap:2.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:1200px;margin:0 auto}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:25px;padding:2.5rem 2rem;backdrop-filter:blur(15px)}
+.card h3{font-size:1.6rem;margin-bottom:.8rem;color:var(--p)}
+.card p{margin-bottom:1.2rem;opacity:.9}
+
+footer{text-align:center;padding:3rem 1rem;font-size:.9rem;opacity:.6}
+</style>
 </head>
+
 <body>
-    <audio id="ambient-sound" loop></audio>
-    <audio id="click-sound"></audio>
-    <audio id="hover-sound"></audio>
-    <audio id="select-sound"></audio>
+<!-- ░▒▓█  WELCOME GATE  █▓▒░ -->
+<div id="gate">
+  <h1>Welcome</h1>
+  <p>crafted with code & caffeine ☕</p>
+  <button onclick="enterSite()">Tap to Enter</button>
+</div>
 
-    <!-- Unified Animated Background -->
-    <div class="background-wrapper">
-        <canvas id="particle-canvas"></canvas>
+<!-- ░▒▓█  DNA HELIX  █▓▒░ -->
+<div class="dna">
+  <svg width="100%" height="100%" viewBox="0 0 60 60">
+    <g fill="none" stroke="var(--p)" stroke-width="2">
+      <path d="M30 5 C20 15 20 45 30 55" />
+      <path d="M30 5 C40 15 40 45 30 55" />
+      <line x1="30" y1="5" x2="30" y2="55" />
+    </g>
+  </svg>
+</div>
+
+<!-- ░▒▓█  BACKGROUNDS  █▓▒░ -->
+<canvas id="neural-bg"></canvas>
+<canvas id="ecg-bg"></canvas>
+
+<!-- ░▒▓█  MAIN SITE  █▓▒░ -->
+<div class="cursor"></div>
+
+<!-- floating medical icons -->
+<span class="floating-icon" style="left:10%;animation-delay:-2s">❤️</span>
+<span class="floating-icon" style="left:30%;animation-delay:-7s">🧠</span>
+<span class="floating-icon" style="left:60%;animation-delay:-12s">🧬</span>
+<span class="floating-icon" style="left:80%;animation-delay:-17s">⚕️</span>
+
+<section class="hero">
+  <div>
+    <h1>Dhruv Mehta</h1>
+    <p>MBBS Student • AI Researcher • Code Artist</p>
+    <p>Bridging medicine & technology for tomorrow’s health-care.</p>
+    <a class="btn" href="https://medium.com/@dhruvmehta.rps" target="_blank">Medium</a>
+    <a class="btn" href="mailto:dhruvmehta.rps@gmail.com">Email</a>
+    <a class="btn" href="https://www.instagram.com/itsdhruv_08?utm_source=ig_web_button_share_sheet&igsh=bWFqd3l5dWdkMDAx" target="_blank">Instagram</a>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Featured Work</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>🎮 Mobile Tetris</h3>
+      <p>Swipe-friendly Tetris built with vanilla JS. Play on any device.</p>
+      <a class="btn" href="https://classy-flan-bb3159.netlify.app/" target="_blank">Play Now</a>
     </div>
 
-    <!-- Welcome Screen -->
-    <div id="welcome-screen" class="screen active">
-        <div class="interactive-orb-container">
-            <div id="interactive-orb" data-sound="hover"></div>
-        </div>
-        <div class="welcome-content">
-            <h1 id="welcome-title"><span class="char">W</span><span class="char">e</span><span class="char">l</span><span class="char">c</span><span class="char">o</span><span class="char">m</span><span class="char">e</span> <span class="char">t</span><span class="char">o</span> <span class="char">m</span><span class="char">y</span> <span class="char">P</span><span class="char">o</span><span class="char">r</span><span class="char">t</span><span class="char">f</span><span class="char">o</span><span class="char">l</span><span class="char">i</span><span class="char">o</span></h1>
-            <p id="name-reveal" class="name-reveal">I am <span class="glitch" data-text="Dhruv Mehta">Dhruv Mehta</span>, a medical student in 3rd year of MBBS. I have keen interest in coding and writing medical articles.</p>
-            <button id="enter-button" data-sound="click">Enter the Cortex</button>
-        </div>
+    <div class="card">
+      <h3>⏱️ FocusFlow Pomodoro</h3>
+      <p>Customizable 25-minute timer with stats, themes & audio cues.</p>
+      <a class="btn" href="https://pulseproductive.netlify.app/" target="_blank">Try It</a>
     </div>
 
-    <!-- Brain Interaction Screen -->
-    <div id="brain-screen" class="screen">
-         <div class="brain-container">
-            <svg id="interactive-brain" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-                <defs>
-                    <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="10" result="blur"/>
-                        <feFlood flood-color="var(--accent-blue)" result="color"/>
-                        <feComposite in="color" in2="blur" operator="in" result="glow"/>
-                        <feMerge>
-                            <feMergeNode in="glow"/>
-                            <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
-                    </filter>
-                     <filter id="glow-magenta" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="10" result="blur"/>
-                         <feFlood flood-color="var(--accent-pink)" result="color"/>
-                        <feComposite in="color" in2="blur" operator="in" result="glow"/>
-                        <feMerge>
-                            <feMergeNode in="glow"/>
-                            <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
-                    </filter>
-                     <filter id="glow-impulse" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="5" result="blur"/>
-                         <feFlood flood-color="var(--neutral-light)" result="color"/>
-                        <feComposite in="color" in2="blur" operator="in" result="glow"/>
-                         <feMerge>
-                            <feMergeNode in="glow"/>
-                        </feMerge>
-                    </filter>
-                </defs>
-
-                <line x1="400" y1="20" x2="400" y2="580" stroke="rgba(240, 240, 240, 0.1)" stroke-width="1.5"/>
-
-                <g id="brain-left" class="brain-half" data-sound="hover" data-section="coding">
-                    <path class="brain-outline" filter="url(#glow-blue)" d="M400 50 C 150 50, 0 200, 0 325 C 0 450, 150 550, 400 550 L 400 50 Z" />
-                    <path class="brain-internal" d="M 200 150 Q 250 250 200 350 M 300 120 Q 380 300 300 480 M 100 200 Q 150 300 100 400 M 150 100 L 250 200 L 150 300 L 250 400 L 150 500"/>
-                    <circle cx="200" cy="150" r="8" class="node"/>
-                    <circle cx="300" cy="120" r="10" class="node delay1"/>
-                    <circle cx="100" cy="200" r="7" class="node delay2"/>
-                    <circle cx="250" cy="200" r="9" class="node delay3"/>
-                    <path class="impulse blue" d="M 200 150 Q 250 250 200 350"/>
-                    <path class="impulse blue delay1" d="M 300 120 Q 380 300 300 480"/>
-                    <text x="200" y="310" class="brain-text">CODING</text>
-                </g>
-
-                 <g id="brain-right" class="brain-half" data-sound="hover" data-section="medical">
-                    <path class="brain-outline" filter="url(#glow-magenta)" d="M400 50 C 650 50, 800 200, 800 325 C 800 450, 650 550, 400 550 L 400 50 Z" />
-                    <path class="brain-internal" d="M 600 150 Q 550 250 600 350 M 500 120 Q 420 300 500 480 M 700 200 Q 650 300 700 400 M 650 100 L 550 200 L 650 300 L 550 400 L 650 500"/>
-                    <circle cx="600" cy="150" r="8" class="node"/>
-                    <circle cx="500" cy="120" r="10" class="node delay1"/>
-                    <circle cx="700" cy="200" r="7" class="node delay2"/>
-                    <circle cx="550" cy="200" r="9" class="node delay3"/>
-                    <path class="impulse magenta" d="M 600 150 Q 550 250 600 350"/>
-                    <path class="impulse magenta delay1" d="M 500 120 Q 420 300 500 480"/>
-                    <text x="600" y="310" class="brain-text">MEDICAL</text>
-                </g>
-            </svg>
-        </div>
-         <p class="instruction">Select a hemisphere to explore the domain</p>
+    <div class="card">
+      <h3>🧬 Micro-plastics & Health</h3>
+      <p>Research article on how invisible plastics affect human health.</p>
+      <a class="btn" href="https://medium.com/@dhruvmehta.rps/the-invisible-threat-microplastics-your-health-and-what-we-know-so-far-d30ffc55a7ca" target="_blank">Read</a>
     </div>
 
-    <!-- Coding Section -->
-    <div id="coding-section" class="content-section screen">
-        <button class="back-button" data-sound="click">← Back to Cortex</button>
-        <h2>Coding Nexus</h2>
-        <div class="project-grid">
-            <div class="project-card" data-sound="hover">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <i class="fas fa-gamepad project-icon"></i>
-                    <h3>Tetris Game</h3>
-                    <p>Classic Tetris fun built with vanilla JavaScript, HTML, and CSS.</p>
-                    <a href="https://classy-flan-bb3159.netlify.app/" target="_blank" class="link-button" data-sound="click">Play Game</a>
-                </div>
-            </div>
-            <div class="project-card" data-sound="hover">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <i class="fas fa-stopwatch project-icon"></i>
-                    <h3>Productivity Timer</h3>
-                    <p>A sleek Pomodoro-style timer to enhance focus sessions.</p>
-                    <a href="https://pulseproductive.netlify.app/" target="_blank" class="link-button" data-sound="click">Use Timer</a>
-                </div>
-            </div>
-            <!-- Add more project cards here if needed -->
-        </div>
+    <div class="card">
+      <h3>🧘 Dopamine Detox</h3>
+      <p>Hitting the reset button on your brain in a hyper-stimulated world.</p>
+      <a class="btn" href="https://medium.com/@dhruvmehta.rps/dopamine-detox-hitting-the-reset-button-on-your-brain-8999fcabbb3f" target="_blank">Read</a>
     </div>
 
-    <!-- Medical Section -->
-    <div id="medical-section" class="content-section screen">
-        <button class="back-button" data-sound="click">← Back to Cortex</button>
-        <h2>Clinical Insights</h2>
-         <div class="project-grid">
-             <div class="project-card" data-sound="hover">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <i class="fab fa-medium project-icon"></i>
-                    <h3>Medium Articles</h3>
-                    <p>Exploring diverse medical topics, research, and personal reflections.</p>
-                    <a href="https://medium.com/@dhruvmehta.rps" target="_blank" class="link-button" data-sound="click">Read on Medium</a>
-                </div>
-             </div>
-              <div class="project-card" data-sound="hover">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <i class="fas fa-flask project-icon"></i>
-                    <h3>ResearchGate Profile</h3>
-                    <p>Access to published research papers and academic contributions.</p>
-                    <a href="#" target="_blank" class="link-button" data-sound="click">View Research (Pending)</a>
-                </div>
-             </div>
-             <!-- Add more project cards here if needed -->
-        </div>
+    <div class="card">
+      <h3>🧠 The Vanishing Mind</h3>
+      <p>Rescuing your attention span in the digital age.</p>
+      <a class="btn" href="https://medium.com/@dhruvmehta.rps/the-vanishing-mind-rescuing-your-attention-span-in-the-digital-age-35af8f839ca6" target="_blank">Read</a>
     </div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
+<footer>© 2025 Dhruv Mehta — Crafted with code and caffeine.</footer>
+
+<script>
+/* ===== UTILS ===== */
+const rand=(min,max)=>Math.random()*(max-min)+min;
+const $=(sel)=>document.querySelector(sel);
+
+/* ===== GATE ===== */
+function enterSite(){
+  $('#gate').style.transform='translateY(-110%)';
+}
+
+/* ===== CUSTOM CURSOR ===== */
+const cursor=$('.cursor');
+addEventListener('mousemove',e=>{
+  cursor.style.left=e.clientX+'px';
+  cursor.style.top=e.clientY+'px';
+});
+
+/* ===== NEURAL BACKGROUND ===== */
+(()=>{
+  const c=$('#neural-bg');
+  const ctx=c.getContext('2d');
+  const resize=()=>{c.width=innerWidth;c.height=innerHeight};
+  resize(); addEventListener('resize',resize);
+  const nodes=[],edges=[],nodeCount=60;
+  for(let i=0;i<nodeCount;i++){
+    nodes.push({x:rand(0,c.width),y:rand(0,c.height),vx:rand(-.2,.2),vy:rand(-.2,.2)});
+  }
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const d=Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y);
+      if(d<150) edges.push([i,j,d]);
+    }
+  }
+  function drawNeural(){
+    ctx.clearRect(0,0,c.width,c.height);
+    ctx.globalAlpha=.45;
+    ctx.strokeStyle='var(--p)';
+    ctx.lineWidth=.5;
+    edges.forEach(([i,j,d])=>{
+      const n1=nodes[i],n2=nodes[j];
+      ctx.globalAlpha=Math.max(0,.45-d/300);
+      ctx.beginPath(); ctx.moveTo(n1.x,n1.y); ctx.lineTo(n2.x,n2.y); ctx.stroke();
+    });
+    ctx.globalAlpha=1;
+    nodes.forEach(n=>{
+      ctx.fillStyle='var(--p)';
+      ctx.beginPath(); ctx.arc(n.x,n.y,2,0,Math.PI*2); ctx.fill();
+      n.x+=n.vx; n.y+=n.vy;
+      if(n.x<0||n.x>c.width) n.vx*=-1;
+      if(n.y<0||n.y>c.height) n.vy*=-1;
+    });
+    requestAnimationFrame(drawNeural);
+  }
+  drawNeural();
+})();
+
+/* ===== CELL PARTICLES ===== */
+(()=>{
+  for(let i=0;i<25;i++){
+    const p=document.createElement('div');
+    p.className='cell-particle';
+    p.style.width=p.style.height=rand(2,6)+'px';
+    p.style.top=rand(0,100)+'vh';
+    p.style.left=rand(0,100)+'vw';
+    p.style.setProperty('--dx',rand(-200,200)+'px');
+    p.style.setProperty('--dy',rand(-200,200)+'px');
+    p.style.animationDuration=rand(20,40)+'s';
+    document.body.appendChild(p);
+  }
+})();
+
+/* ===== 72 BPM RUNNING ECG ===== */
+(()=>{
+  const c=$('#ecg-bg');
+  const ctx=c.getContext('2d');
+  const resize=()=>{c.width=innerWidth;c.height=innerHeight};
+  resize(); addEventListener('resize',resize);
+  const midY=c.height/2,speed=2.5,sec=1000/72;
+  const beatPts=[{x:0,y:0},{x:20,y:0},{x:25,y:-5},{x:30,y:12},{x:35,y:-6},{x:40,y:0},{x:80,y:0}];
+  let scroll=0;
+  function yAt(x){
+    for(let i=0;i<beatPts.length-1;i++){
+      const p1=beatPts[i],p2=beatPts[i+1];
+      if(x>=p1.x&&x<=p2.x){
+        const t=(x-p1.x)/(p2.x-p1.x);
+        return p1.y+(p2.y-p1.y)*t;
+      }
+    }
+    return 0;
+  }
+  function drawECG(){
+    ctx.clearRect(0,0,c.width,c.height);
+    ctx.shadowColor='#00ff99'; ctx.shadowBlur=10;
+    ctx.strokeStyle='#00ff99'; ctx.lineWidth=1.5;
+    ctx.beginPath();
+    for(let px=0;px<=c.width;px++){
+      const patternX=(px+scroll)%80;
+      ctx.lineTo(px,midY+yAt(patternX));
+    }
+    ctx.stroke(); ctx.shadowBlur=0;
+
+    ctx.globalAlpha=.3; ctx.strokeStyle='#00ffff';
+    ctx.beginPath();
+    for(let px=0;px<=c.width;px++){
+      const patternX=(px+scroll-10)%80;
+      ctx.lineTo(px,midY+yAt(patternX));
+    }
+    ctx.stroke(); ctx.globalAlpha=1;
+
+    scroll=(scroll+speed)%80;
+    requestAnimationFrame(drawECG);
+  }
+  drawECG();
+})();
+</script>
 </body>
 </html>
