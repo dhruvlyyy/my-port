@@ -14,8 +14,8 @@
 @keyframes pulseBg{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(60deg)}}
 #gate h1{font-size:clamp(2.5rem,10vw,5rem);letter-spacing:.07em;text-transform:uppercase;background:linear-gradient(90deg,var(--p),var(--s),var(--p));background-size:200%;-webkit-background-clip:text;color:transparent;animation:glitch 2.5s infinite}
 @keyframes glitch{0%{background-position:0%}50%{background-position:200%}100%{background-position:0%}}
-#gate p{margin:1.2rem 0 2.5rem;font-size:1.3rem;font-weight:300}
-#gate button{padding:1rem 3rem;border:none;border-radius:50px;background:#fff;color:#0f172a;font-weight:700;font-size:1.1rem;cursor:pointer;transition:.4s}
+#gate p{margin:1.2rem 0 2.5rem;font-size:1.3rem;font-weight:300;color:#fff}
+#gate button{padding:1rem 3rem;border:none;border-radius:50px;background:#fff;color:#000;font-weight:700;font-size:1.1rem;cursor:pointer;transition:.4s}
 #gate button:hover{transform:scale(1.08);box-shadow:0 0 25px var(--p)}
 
 /* === CURSOR === */
@@ -41,24 +41,24 @@
 .card{transition:.5s}
 .card:hover{transform:translateY(-12px) scale(1.02);border-color:var(--p);box-shadow:0 0 20px var(--p)}
 
-/* === EXISTING STYLES === */
-body{background:#111214}
+/* === EXISTING STYLES (WHITE TEXT) === */
+body{background:#111214;color:#fff}
 #ecg-bg{position:fixed;inset:0;z-index:-2}
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 20px}
 .hero h1{font-size:clamp(3rem,10vw,7rem);background:linear-gradient(135deg,var(--p),var(--s));-webkit-background-clip:text;color:transparent;animation:glow 2s ease-in-out infinite alternate}
 @keyframes glow{from{text-shadow:0 0 20px var(--p)}to{text-shadow:0 0 30px var(--s),0 0 50px var(--s)}}
 .hero p{font-size:1.4rem;margin:.5rem 0;opacity:.85}
-.btn{display:inline-block;margin:.4rem .4rem 0 0;padding:.9rem 2.4rem;background:linear-gradient(45deg,var(--p),var(--s));color:#0f172a;border-radius:50px;font-weight:700;text-decoration:none;transition:.3s}
+.btn{display:inline-block;margin:.4rem .4rem 0 0;padding:.9rem 2.4rem;background:linear-gradient(45deg,var(--p),var(--s));color:#fff;border-radius:50px;font-weight:700;text-decoration:none;transition:.3s}
 .btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 10px 25px rgba(0,245,255,.6)}
 
 #projects{min-height:100vh;padding:120px 20px}
-#projects h2{text-align:center;font-size:2.8rem;margin-bottom:3rem}
+#projects h2{text-align:center;font-size:2.8rem;margin-bottom:3rem;color:#fff}
 .grid{display:grid;gap:2.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:1200px;margin:0 auto}
 .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:25px;padding:2.5rem 2rem;backdrop-filter:blur(15px)}
 .card h3{font-size:1.6rem;margin-bottom:.8rem;color:var(--p)}
-.card p{margin-bottom:1.2rem;opacity:.9}
+.card p{margin-bottom:1.2rem;opacity:.9;color:#fff}
 
-footer{text-align:center;padding:3rem 1rem;font-size:.9rem;opacity:.6}
+footer{text-align:center;padding:3rem 1rem;font-size:.9rem;opacity:.6;color:#fff}
 </style>
 </head>
 
