@@ -1,261 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Dhruv Mehta • Portfolio</title>
-<style>
-/* === RESET & ROOT === */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-:root{--p:#00f5ff;--s:#ff00ff;--bg:#111214;--fg:#fff}
-
-/* === WELCOME GATE === */
-#gate{z-index:9999;position:fixed;inset:0;background:radial-gradient(circle at 30% 70%,var(--p) 0%,var(--s) 40%,#000 80%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;animation:pulseBg 6s infinite alternate;transition:transform 1s cubic-bezier(.86,0,.07,1)}
-@keyframes pulseBg{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(60deg)}}
-#gate h1{font-size:clamp(2.5rem,10vw,5rem);letter-spacing:.07em;text-transform:uppercase;background:linear-gradient(90deg,var(--p),var(--s),var(--p));background-size:200%;-webkit-background-clip:text;color:transparent;animation:glitch 2.5s infinite}
-@keyframes glitch{0%{background-position:0%}50%{background-position:200%}100%{background-position:0%}}
-#gate p{margin:1.2rem 0 2.5rem;font-size:1.3rem;font-weight:300;color:#fff}
-#gate button{padding:1rem 3rem;border:none;border-radius:50px;background:#fff;color:#000;font-weight:700;font-size:1.1rem;cursor:pointer;transition:.4s}
-#gate button:hover{transform:scale(1.08);box-shadow:0 0 25px var(--p)}
-
-/* === CURSOR === */
-.cursor{position:fixed;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle,var(--p),transparent);pointer-events:none;z-index:9998;mix-blend-mode:difference;transition:transform .1s}
-
-/* === NEURAL BACKGROUND === */
-#neural-bg{position:fixed;inset:0;z-index:-3;pointer-events:none}
-
-/* === DNA HELIX === */
-.dna{position:fixed;top:20px;right:20px;width:80px;height:80px;z-index:-1;opacity:.4}
-.dna svg{animation:spin 20s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* === FLOATING ICONS === */
-.floating-icon{position:absolute;font-size:2.2rem;color:var(--p);opacity:.15;animation:float 20s linear infinite}
-@keyframes float{0%{transform:translateY(110vh) rotate(0deg)}100%{transform:translateY(-20vh) rotate(720deg)}}
-
-/* === CELL PARTICLES === */
-.cell-particle{position:fixed;border-radius:50%;background:radial-gradient(circle,var(--p),transparent 70%);opacity:.4;pointer-events:none;animation:drift 25s linear infinite}
-@keyframes drift{0%{transform:translate(0,0) scale(.5)}100%{transform:translate(var(--dx),var(--dy)) scale(1.5)}}
-
-/* === CARDS PULSE === */
-.card{transition:.5s}
-.card:hover{transform:translateY(-12px) scale(1.02);border-color:var(--p);box-shadow:0 0 20px var(--p)}
-
-/* === EXISTING STYLES (WHITE TEXT) === */
-body{background:#111214;color:#fff}
-#ecg-bg{position:fixed;inset:0;z-index:-2}
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 20px}
-.hero h1{font-size:clamp(3rem,10vw,7rem);background:linear-gradient(135deg,var(--p),var(--s));-webkit-background-clip:text;color:transparent;animation:glow 2s ease-in-out infinite alternate}
-@keyframes glow{from{text-shadow:0 0 20px var(--p)}to{text-shadow:0 0 30px var(--s),0 0 50px var(--s)}}
-.hero p{font-size:1.4rem;margin:.5rem 0;opacity:.85}
-.btn{display:inline-block;margin:.4rem .4rem 0 0;padding:.9rem 2.4rem;background:linear-gradient(45deg,var(--p),var(--s));color:#fff;border-radius:50px;font-weight:700;text-decoration:none;transition:.3s}
-.btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 10px 25px rgba(0,245,255,.6)}
-
-#projects{min-height:100vh;padding:120px 20px}
-#projects h2{text-align:center;font-size:2.8rem;margin-bottom:3rem;color:#fff}
-.grid{display:grid;gap:2.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:1200px;margin:0 auto}
-.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:25px;padding:2.5rem 2rem;backdrop-filter:blur(15px)}
-.card h3{font-size:1.6rem;margin-bottom:.8rem;color:var(--p)}
-.card p{margin-bottom:1.2rem;opacity:.9;color:#fff}
-
-footer{text-align:center;padding:3rem 1rem;font-size:.9rem;opacity:.6;color:#fff}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f1eadd">
+  <meta name="description" content="Dhruv Mehta — exploring the intersection of medicine and artificial intelligence. Discover my writing, experiments, and apps.">
+  <title>Dhruv Mehta — Care & Intelligence</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-<!-- ░▒▓█  WELCOME GATE  █▓▒░ -->
-<div id="gate">
-  <h1>Welcome</h1>
-  <p>crafted with code & caffeine ☕</p>
-  <button onclick="enterSite()">Tap to Enter</button>
-</div>
-
-<!-- ░▒▓█  DNA HELIX  █▓▒░ -->
-<div class="dna">
-  <svg width="100%" height="100%" viewBox="0 0 60 60">
-    <g fill="none" stroke="var(--p)" stroke-width="2">
-      <path d="M30 5 C20 15 20 45 30 55" />
-      <path d="M30 5 C40 15 40 45 30 55" />
-      <line x1="30" y1="5" x2="30" y2="55" />
-    </g>
-  </svg>
-</div>
-
-<!-- ░▒▓█  BACKGROUNDS  █▓▒░ -->
-<canvas id="neural-bg"></canvas>
-<canvas id="ecg-bg"></canvas>
-
-<!-- ░▒▓█  MAIN SITE  █▓▒░ -->
-<div class="cursor"></div>
-
-<!-- floating medical icons -->
-<span class="floating-icon" style="left:10%;animation-delay:-2s">❤️</span>
-<span class="floating-icon" style="left:30%;animation-delay:-7s">🧠</span>
-<span class="floating-icon" style="left:60%;animation-delay:-12s">🧬</span>
-<span class="floating-icon" style="left:80%;animation-delay:-17s">⚕️</span>
-
-<section class="hero">
-  <div>
-    <h1>Dhruv Mehta</h1>
-    <p>MBBS Student • AI Researcher • Code Artist</p>
-    <p>Bridging medicine & technology for tomorrow’s health-care.</p>
-    <a class="btn" href="https://medium.com/@dhruvmehta.rps" target="_blank">Medium</a>
-    <a class="btn" href="mailto:dhruvmehta.rps@gmail.com">Email</a>
-    <a class="btn" href="https://www.instagram.com/itsdhruv_08?utm_source=ig_web_button_share_sheet&igsh=bWFqd3l5dWdkMDAx" target="_blank">Instagram</a>
-  </div>
-</section>
-
-<section id="projects">
-  <h2>Featured Work</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>🎮 Mobile Tetris</h3>
-      <p>Swipe-friendly Tetris built with vanilla JS. Play on any device.</p>
-      <a class="btn" href="https://classy-flan-bb3159.netlify.app/" target="_blank">Play Now</a>
-    </div>
-
-    <div class="card">
-      <h3>⏱️ FocusFlow Pomodoro</h3>
-      <p>Customizable 25-minute timer with stats, themes & audio cues.</p>
-      <a class="btn" href="https://pulseproductive.netlify.app/" target="_blank">Try It</a>
-    </div>
-
-    <div class="card">
-      <h3>🧬 Micro-plastics & Health</h3>
-      <p>Research article on how invisible plastics affect human health.</p>
-      <a class="btn" href="https://medium.com/@dhruvmehta.rps/the-invisible-threat-microplastics-your-health-and-what-we-know-so-far-d30ffc55a7ca" target="_blank">Read</a>
-    </div>
-
-    <div class="card">
-      <h3>🧘 Dopamine Detox</h3>
-      <p>Hitting the reset button on your brain in a hyper-stimulated world.</p>
-      <a class="btn" href="https://medium.com/@dhruvmehta.rps/dopamine-detox-hitting-the-reset-button-on-your-brain-8999fcabbb3f" target="_blank">Read</a>
-    </div>
-
-    <div class="card">
-      <h3>🧠 The Vanishing Mind</h3>
-      <p>Rescuing your attention span in the digital age.</p>
-      <a class="btn" href="https://medium.com/@dhruvmehta.rps/the-vanishing-mind-rescuing-your-attention-span-in-the-digital-age-35af8f839ca6" target="_blank">Read</a>
-    </div>
-  </div>
-</section>
-
-<footer>© 2025 Dhruv Mehta — Crafted with code and caffeine.</footer>
-
-<script>
-/* ===== UTILS ===== */
-const rand=(min,max)=>Math.random()*(max-min)+min;
-const $=(sel)=>document.querySelector(sel);
-
-/* ===== GATE ===== */
-function enterSite(){
-  $('#gate').style.transform='translateY(-110%)';
-}
-
-/* ===== CUSTOM CURSOR ===== */
-const cursor=$('.cursor');
-addEventListener('mousemove',e=>{
-  cursor.style.left=e.clientX+'px';
-  cursor.style.top=e.clientY+'px';
-});
-
-/* ===== NEURAL BACKGROUND ===== */
-(()=>{
-  const c=$('#neural-bg');
-  const ctx=c.getContext('2d');
-  const resize=()=>{c.width=innerWidth;c.height=innerHeight};
-  resize(); addEventListener('resize',resize);
-  const nodes=[],edges=[],nodeCount=60;
-  for(let i=0;i<nodeCount;i++){
-    nodes.push({x:rand(0,c.width),y:rand(0,c.height),vx:rand(-.2,.2),vy:rand(-.2,.2)});
-  }
-  for(let i=0;i<nodes.length;i++){
-    for(let j=i+1;j<nodes.length;j++){
-      const d=Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y);
-      if(d<150) edges.push([i,j,d]);
-    }
-  }
-  function drawNeural(){
-    ctx.clearRect(0,0,c.width,c.height);
-    ctx.globalAlpha=.45;
-    ctx.strokeStyle='var(--p)';
-    ctx.lineWidth=.5;
-    edges.forEach(([i,j,d])=>{
-      const n1=nodes[i],n2=nodes[j];
-      ctx.globalAlpha=Math.max(0,.45-d/300);
-      ctx.beginPath(); ctx.moveTo(n1.x,n1.y); ctx.lineTo(n2.x,n2.y); ctx.stroke();
-    });
-    ctx.globalAlpha=1;
-    nodes.forEach(n=>{
-      ctx.fillStyle='var(--p)';
-      ctx.beginPath(); ctx.arc(n.x,n.y,2,0,Math.PI*2); ctx.fill();
-      n.x+=n.vx; n.y+=n.vy;
-      if(n.x<0||n.x>c.width) n.vx*=-1;
-      if(n.y<0||n.y>c.height) n.vy*=-1;
-    });
-    requestAnimationFrame(drawNeural);
-  }
-  drawNeural();
-})();
-
-/* ===== CELL PARTICLES ===== */
-(()=>{
-  for(let i=0;i<25;i++){
-    const p=document.createElement('div');
-    p.className='cell-particle';
-    p.style.width=p.style.height=rand(2,6)+'px';
-    p.style.top=rand(0,100)+'vh';
-    p.style.left=rand(0,100)+'vw';
-    p.style.setProperty('--dx',rand(-200,200)+'px');
-    p.style.setProperty('--dy',rand(-200,200)+'px');
-    p.style.animationDuration=rand(20,40)+'s';
-    document.body.appendChild(p);
-  }
-})();
-
-/* ===== 72 BPM RUNNING ECG ===== */
-(()=>{
-  const c=$('#ecg-bg');
-  const ctx=c.getContext('2d');
-  const resize=()=>{c.width=innerWidth;c.height=innerHeight};
-  resize(); addEventListener('resize',resize);
-  const midY=c.height/2,speed=2.5,sec=1000/72;
-  const beatPts=[{x:0,y:0},{x:20,y:0},{x:25,y:-5},{x:30,y:12},{x:35,y:-6},{x:40,y:0},{x:80,y:0}];
-  let scroll=0;
-  function yAt(x){
-    for(let i=0;i<beatPts.length-1;i++){
-      const p1=beatPts[i],p2=beatPts[i+1];
-      if(x>=p1.x&&x<=p2.x){
-        const t=(x-p1.x)/(p2.x-p1.x);
-        return p1.y+(p2.y-p1.y)*t;
-      }
-    }
-    return 0;
-  }
-  function drawECG(){
-    ctx.clearRect(0,0,c.width,c.height);
-    ctx.shadowColor='#00ff99'; ctx.shadowBlur=10;
-    ctx.strokeStyle='#00ff99'; ctx.lineWidth=1.5;
-    ctx.beginPath();
-    for(let px=0;px<=c.width;px++){
-      const patternX=(px+scroll)%80;
-      ctx.lineTo(px,midY+yAt(patternX));
-    }
-    ctx.stroke(); ctx.shadowBlur=0;
-
-    ctx.globalAlpha=.3; ctx.strokeStyle='#00ffff';
-    ctx.beginPath();
-    for(let px=0;px<=c.width;px++){
-      const patternX=(px+scroll-10)%80;
-      ctx.lineTo(px,midY+yAt(patternX));
-    }
-    ctx.stroke(); ctx.globalAlpha=1;
-
-    scroll=(scroll+speed)%80;
-    requestAnimationFrame(drawECG);
-  }
-  drawECG();
-})();
-</script>
+  <a class="skip-link" href="#articles">Skip to articles</a>
+  <div id="stage" aria-hidden="true"><div class="architecture"></div><canvas id="scene"></canvas><img class="scene-fallback" src="assets/sculpture.svg" alt=""></div>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="wordmark" href="#home" aria-label="Dhruv Mehta, home">Dhruv Mehta<span class="wordmark-dot">.</span></a>
+    <nav aria-label="Main navigation"><a href="#articles">Writing</a><a href="#work">Making</a><a href="#about">About</a></nav>
+    <a class="contact-link" href="mailto:dhruvmehta.rps@gmail.com">Let’s talk <span aria-hidden="true">↗</span></a>
+  </header>
+  <aside class="journey-nav" aria-label="Journey chapters">
+    <a href="#home" class="current" aria-current="location"><span>Beginning</span><i></i></a>
+    <a href="#article-1"><span>Microplastics</span><i></i></a>
+    <a href="#article-2"><span>Dopamine</span><i></i></a>
+    <a href="#article-3"><span>Attention</span><i></i></a>
+    <a href="#work"><span>Making</span><i></i></a>
+    <a href="#about"><span>About</span><i></i></a>
+  </aside>
+  <main>
+    <section id="home" class="hero chapter" data-chapter="Beginning">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="rule"></span> Medicine × Artificial intelligence</p>
+        <h1>Where care<br>meets<br><em>intelligence.</em></h1>
+        <p class="hero-description">A curious mind at the intersection of<br class="desktop-break"> human health and what comes next.</p>
+        <a class="button" href="#articles">Enter the journey <span aria-hidden="true">↘</span></a>
+      </div>
+      <div class="hero-note"><span class="tiny-line"></span><p>Human questions.<br>Thoughtful technology.<br>Endless possibility.</p></div>
+      <div class="hero-foot"><span>01 / Listen. Learn. Build.</span><a href="#articles">Follow the thread <span aria-hidden="true">↓</span></a><span>Medicine, with imagination.</span></div>
+    </section>
+    <section id="articles" class="writing-intro">
+      <p class="eyebrow">The listening thread</p>
+      <h2>Every idea begins<br>with <em>a question.</em></h2>
+      <p>Follow the stethoscope through three stories about<br>our bodies, our brains, and the world around us.</p>
+      <a class="text-link" href="https://medium.com/@dhruvmehta.rps" target="_blank" rel="noopener noreferrer">All writing on Medium <span aria-hidden="true">↗</span></a>
+    </section>
+    <article id="article-1" class="article-stop chapter" data-chapter="Microplastics">
+      <div class="article-copy"><div class="article-index"><span>01</span><div class="index-rule"></div><span>Environment / Health</span></div>
+        <p class="eyebrow">Look a little closer</p><h2>The invisible<br><em>threat.</em></h2>
+        <p class="article-subtitle">Microplastics, your health, and what we know so far.</p>
+        <p class="article-description">The smallest things can raise the biggest questions. Exploring the unseen presence of plastics in our lives and their connection to human health.</p>
+        <a class="button outline" href="https://medium.com/@dhruvmehta.rps/the-invisible-threat-microplastics-your-health-and-what-we-know-so-far-d30ffc55a7ca" target="_blank" rel="noopener noreferrer">Read the story <span aria-hidden="true">↗</span></a>
+      </div><div class="scene-caption"><span class="caption-dot"></span>01 — What enters our bodies?</div>
+    </article>
+    <article id="article-2" class="article-stop chapter" data-chapter="Dopamine">
+      <div class="article-copy"><div class="article-index"><span>02</span><div class="index-rule"></div><span>Neuroscience / Everyday life</span></div>
+        <p class="eyebrow">A moment to reset</p><h2>Less noise.<br><em>More presence.</em></h2>
+        <p class="article-subtitle">Dopamine detox: hitting the reset button on your brain.</p>
+        <p class="article-description">What happens when everything asks for our attention? A reflection on stimulation, habits, and finding room to think in a constantly connected world.</p>
+        <a class="button outline" href="https://medium.com/@dhruvmehta.rps/dopamine-detox-hitting-the-reset-button-on-your-brain-8999fcabbb3f" target="_blank" rel="noopener noreferrer">Read the story <span aria-hidden="true">↗</span></a>
+      </div><div class="scene-caption"><span class="caption-dot"></span>02 — What shapes our minds?</div>
+    </article>
+    <article id="article-3" class="article-stop chapter" data-chapter="Attention">
+      <div class="article-copy"><div class="article-index"><span>03</span><div class="index-rule"></div><span>Attention / Digital culture</span></div>
+        <p class="eyebrow">Make space for focus</p><h2>The vanishing<br><em>mind.</em></h2>
+        <p class="article-subtitle">Rescuing your attention span in the digital age.</p>
+        <p class="article-description">Our attention is finite. The things competing for it aren’t. Looking at the cost of distraction and our relationship with the digital world.</p>
+        <a class="button outline" href="https://medium.com/@dhruvmehta.rps/the-vanishing-mind-rescuing-your-attention-span-in-the-digital-age-35af8f839ca6" target="_blank" rel="noopener noreferrer">Read the story <span aria-hidden="true">↗</span></a>
+      </div><div class="scene-caption"><span class="caption-dot"></span>03 — What deserves our attention?</div>
+    </article>
+    <section id="work" class="work chapter" data-chapter="Making">
+      <div class="work-copy"><p class="eyebrow">From listening to making</p><h2>Ideas, brought<br><em>to life.</em></h2><p class="work-description">Writing helps me ask better questions.<br>Building lets me explore the answers.</p>
+      <div class="app-tabs" role="tablist" aria-label="Featured apps"><button id="tab-focus" role="tab" aria-selected="true" aria-controls="panel-focus" data-app="focus">01 / FocusFlow</button><button id="tab-tetris" role="tab" aria-selected="false" aria-controls="panel-tetris" tabindex="-1" data-app="tetris">02 / Mobile Tetris</button></div>
+      <div id="panel-focus" class="app-panel" role="tabpanel" aria-labelledby="tab-focus">
+        <div class="app-preview focus-preview" aria-hidden="true"><div class="preview-header"><span>focusflow</span><span>● &nbsp; A little room to focus</span></div><div class="timer-orbit"><span>25:00<small>ONE THING AT A TIME</small></span></div><div class="preview-footer"><span>FOCUS</span><span>PAUSE</span><span>RESET</span></div></div>
+        <div class="app-details"><div><h3>FocusFlow Pomodoro</h3><p>A customizable timer with stats, themes, and audio cues.</p></div><a href="https://pulseproductive.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="Open FocusFlow Pomodoro">Open app <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div id="panel-tetris" class="app-panel" role="tabpanel" aria-labelledby="tab-tetris" hidden>
+        <div class="app-preview tetris-preview" aria-hidden="true"><div class="preview-header"><span>mobile tetris</span><span>MAKE A LITTLE SPACE FOR PLAY</span></div><div class="tetris-board"><div class="tetromino t-one"></div><div class="tetromino t-two"></div><div class="tetromino t-three"></div><div class="tetromino t-four"></div></div><div class="preview-footer"><span>MOVE</span><span>ROTATE</span><span>DROP</span></div></div>
+        <div class="app-details"><div><h3>Mobile Tetris</h3><p>Swipe-friendly Tetris, built with vanilla JavaScript.</p></div><a href="https://classy-flan-bb3159.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="Play Mobile Tetris">Play now <span aria-hidden="true">↗</span></a></div>
+      </div><a class="text-link github-link" href="https://github.com/dhruvlyyy" target="_blank" rel="noopener noreferrer">More experiments on GitHub <span aria-hidden="true">↗</span></a></div>
+      <div class="scene-caption"><span class="caption-dot"></span>The making hand — curiosity in motion</div>
+    </section>
+    <section id="about" class="about chapter" data-chapter="About"><div class="about-label"><p class="eyebrow">The person behind the questions</p><span class="monogram" aria-hidden="true">dm.</span></div><div class="about-copy"><h2>Medicine is human.<br><em>So is curiosity.</em></h2><p>I’m Dhruv Mehta. I study medicine, write about the things that make me curious, and build apps to explore ideas through code.</p><p>This is a place for those threads to meet: what I’m learning, what I’m thinking about, and what I’m making next.</p><a class="text-link" href="mailto:dhruvmehta.rps@gmail.com">Let’s start a conversation <span aria-hidden="true">↗</span></a></div></section>
+    <footer><div class="footer-top"><p>Good things begin<br>with <em>a conversation.</em></p><a href="mailto:dhruvmehta.rps@gmail.com">Say hello <span aria-hidden="true">↗</span></a></div><div class="footer-bottom"><span>© <span id="year">2026</span> Dhruv Mehta</span><div><a href="https://medium.com/@dhruvmehta.rps" target="_blank" rel="noopener noreferrer">Medium ↗</a><a href="https://github.com/dhruvlyyy" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.instagram.com/itsdhruv_08/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div><a href="#home">Back to the beginning ↑</a></div></footer>
+  </main>
+  <div class="experience-controls"><span id="chapter-label">Beginning</span><span class="control-divider"></span><button id="motion-toggle" type="button" aria-pressed="false">Motion <span id="motion-state">on</span></button></div>
+  <div class="reading-progress" aria-hidden="true"><span id="progress"></span></div>
+  <script type="module" src="scene.js"></script>
 </body>
 </html>
