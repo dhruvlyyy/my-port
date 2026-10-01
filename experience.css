@@ -1,0 +1,38 @@
+/* A dedicated sculpture viewport prevents mobile clipping and missing hands. */
+#stage{left:44%;right:0;top:0;bottom:0;width:56%;background:radial-gradient(ellipse at 48% 35%,#f8f1e5 0%,#eee2cf 63%,#deceb6 100%)}
+#scene{position:absolute;inset:0;width:100%;height:100%}
+.architecture{right:-25%;width:78%}
+.scene-fallback{inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-copy{width:55%}.hero-note{display:none}
+.hero-foot{pointer-events:none}.hero-foot a{pointer-events:auto}
+.article-stop{min-height:105svh;background:linear-gradient(90deg,#f1eadd,#f1eaddf0 42%,transparent 53%)}
+.writing-intro{min-height:55svh;background:linear-gradient(90deg,#f1eadd,#f1eaddf0 42%,transparent 53%)}
+.work{background:linear-gradient(90deg,#f1eadd,#f1eaddfa 45%,transparent 59%)}
+.scene-caption{right:7%;background:#f1eaddc0;padding:10px 14px;border:1px solid #d1c2ac44}
+@media(max-width:1000px) and (min-width:651px){#stage{left:45%;width:55%}.hero-copy{width:62%}.work-copy{width:55%}.hero h1{font-size:8vw}}
+@media(max-width:650px){
+  #stage{left:0;right:0;top:auto;bottom:0;width:100%;height:48svh;border-top:1px solid #d4c4ae55}
+  .hero{min-height:112svh;padding:111px 7% 75px;background:linear-gradient(180deg,#f1eadd 0%,#f1eadd 46%,transparent 55%)}
+  .hero-copy{width:100%}.hero h1{font-size:clamp(53px,12.6vw,77px);margin-bottom:17px}
+  .hero .eyebrow{margin-bottom:20px;font-size:7.5px;letter-spacing:1.4px}
+  .hero-description{font-size:16px;line-height:1.4;margin-bottom:20px}
+  .hero .button{min-height:44px;font-size:14px;padding:11px 18px}
+  .hero-foot{bottom:35px;background:#f1eaddbf;padding:8px 10px;left:5%;right:5%;font-size:7px}
+  .hero-foot>span:last-child{display:none}
+  .writing-intro{min-height:85svh;background:linear-gradient(180deg,#f1eadd 0%,#f1eadd 54%,transparent 70%);padding:75px 7% 340px}
+  .article-stop{min-height:125svh;padding:88px 7% 380px;background:linear-gradient(180deg,#f1eadd 0%,#f1eadd 53%,transparent 66%)}
+  .article-index{margin-bottom:30px}.article-copy h2{font-size:clamp(48px,11.8vw,72px);margin-bottom:20px}
+  .article-copy .eyebrow{margin-bottom:16px}.article-subtitle{font-size:20px;margin-bottom:16px}
+  .article-description{margin-bottom:22px;font-size:12px}
+  .work{min-height:165svh;padding:88px 7% 425px;background:linear-gradient(180deg,#f1eadd 0%,#f1eadd 58%,transparent 77%)}
+  .work-copy{width:100%}.scene-caption{left:7%;right:auto;bottom:38px;font-size:7px;padding:9px 11px}
+  .scene-fallback{top:0;right:0;bottom:0;left:0;height:100%;width:100%;object-fit:cover}
+  .about,footer{position:relative;z-index:3}
+  body.work-view #stage{left:auto;right:0;top:100px;bottom:auto;width:47%;height:38svh;border-top:0;background:radial-gradient(ellipse,#f8f1e5 0%,#eee2cf 80%)}
+  .work{background:transparent;min-height:125svh;padding-bottom:150px}
+  .work h2{width:50%;font-size:41px;line-height:1.03}
+  .work .eyebrow{width:49%;font-size:7px;letter-spacing:1.3px}
+  .work-description{width:49%;font-size:11px;line-height:1.7}
+  .work .app-preview,.work .app-tabs,.work .app-details{position:relative;background-color:var(--paper)}
+  .work .focus-preview{background-color:#dddcd0}.work .tetris-preview{background-color:#34332d}
+}

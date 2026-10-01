@@ -21,6 +21,8 @@
   function updateReading() {
     scheduled = false;
     document.querySelector('.site-header').classList.toggle('scrolled', scrollY > 35);
+    const workRect = document.getElementById('work').getBoundingClientRect();
+    document.body.classList.toggle('work-view', workRect.top < innerHeight * .25 && workRect.bottom > innerHeight * .25);
     const max = document.documentElement.scrollHeight - innerHeight;
     document.getElementById('progress').style.width = `${max > 0 ? scrollY / max * 100 : 0}%`;
     let active = chapters[0];
